@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raven AI — AI Consulting for People & Business</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #08080e;
+      --surface:      #0f0f18;
+      --surface-2:    #151522;
+      --border:       #1e1e30;
+      --border-hover: #3a2a6a;
+      --purple:       #9b59ff;
+      --purple-mid:   #7c3aed;
+      --purple-dim:   #4c1d95;
+      --purple-glow:  rgba(155, 89, 255, 0.12);
+      --accent:       #c084fc;
+      --accent-2:     #e879f9;
+      --text:         #eeeef5;
+      --muted:        #7a7a96;
+      --muted-2:      #a0a0b8;
+      --success:      #34d399;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8,8,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo-mark {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, var(--purple), var(--accent-2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--purple);
+      color: #fff !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section { padding: 6rem 0; }
+
+    .label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1rem;
+    }
+
+    h2.section-title {
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-body {
+      color: var(--muted-2);
+      max-width: 580px;
+      margin-bottom: 3.5rem;
+      font-size: 1rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 60% -10%, rgba(124,58,237,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(192,132,252,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 90%, rgba(232,121,249,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(155,89,255,0.1);
+      border: 1px solid rgba(155,89,255,0.25);
+      border-radius: 100px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow span { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 .grad {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--accent) 50%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted-2);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .btn-group { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple));
+      color: #fff;
+      padding: 0.8rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      box-shadow: 0 4px 24px rgba(124,58,237,0.35);
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted-2);
+      padding: 0.8rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--purple-dim); color: var(--text); }
+
+    /* Hero card */
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--accent-2));
+    }
+
+    .hero-card-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted-2);
+    }
+
+    .activity-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-green { background: var(--success); }
+    .dot-purple { background: var(--purple); }
+    .dot-accent { background: var(--accent); }
+
+    /* ── PROBLEMS ── */
+    .problems-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .problems-grid { grid-template-columns: 1fr; }
+    }
+
+    .problem-cell {
+      background: var(--surface);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+    .problem-cell:hover { background: var(--surface-2); }
+
+    .problem-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+
+    .problem-cell h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .problem-cell p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--purple-dim), transparent);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 1.5rem;
+      padding: 0 0 2.5rem 0;
+      align-items: flex-start;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step-num {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(124,58,237,0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      padding-top: 0.5rem;
+    }
+
+    .step-content p { font-size: 0.9rem; color: var(--muted-2); }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 8px 32px var(--purple-glow);
+      transform: translateY(-2px);
+    }
+
+    .service-card.featured {
+      border-color: var(--purple-dim);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(124,58,237,0.07) 100%);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      background: rgba(155,89,255,0.15);
+      border: 1px solid var(--purple-dim);
+      color: var(--accent);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    .service-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: rgba(155,89,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted-2);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .philosophy-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    blockquote {
+      border-left: 3px solid var(--purple);
+      padding-left: 1.5rem;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      font-style: normal;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .philosophy-points {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .phil-point {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .phil-point-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: rgba(155,89,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .phil-point-text h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .phil-point-text p { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+    }
+
+    .testimonial-stars {
+      color: var(--purple);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .testimonial-card p {
+      font-size: 0.9rem;
+      color: var(--muted-2);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-dim), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-name { font-size: 0.875rem; font-weight: 600; }
+    .author-role { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── FAQ ── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 1.75rem;
+    }
+
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-q {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .faq-q::before {
+      content: 'Q';
+      background: rgba(155,89,255,0.15);
+      color: var(--purple);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .faq-a {
+      font-size: 0.875rem;
+      color: var(--muted-2);
+      line-height: 1.65;
+      padding-left: 1.6rem;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-box p {
+      color: var(--muted-2);
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+      font-size: 1rem;
+    }
+
+    .cta-note {
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── BI DASHBOARD ── */
+    .bi-dashboard {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 3.5rem;
+    }
+
+    .bi-topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.875rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .bi-topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .bi-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .bi-badge {
+      font-size: 0.65rem;
+      background: rgba(52,211,153,0.12);
+      border: 1px solid rgba(52,211,153,0.25);
+      color: var(--success);
+      padding: 0.15rem 0.5rem;
+      border-radius: 100px;
+      letter-spacing: 0.06em;
+    }
+
+    .bi-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .bi-control {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.7rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 5px;
+      cursor: default;
+    }
+
+    .bi-control.active {
+      background: rgba(155,89,255,0.12);
+      border-color: var(--purple-dim);
+      color: var(--accent);
+    }
+
+    .bi-body {
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .bi-body { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .bi-body { grid-template-columns: 1fr; }
+    }
+
+    .bi-kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem;
+    }
+
+    .bi-kpi-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .bi-kpi-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--text), var(--muted-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .bi-kpi-delta {
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    .delta-up { color: var(--success); }
+    .delta-down { color: #f87171; }
+
+    .bi-row {
+      padding: 0 1.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .bi-row { grid-template-columns: 1fr; }
+    }
+
+    .bi-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .bi-panel-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Bar chart */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      height: 100px;
+    }
+
+    .bar-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      flex: 1;
+    }
+
+    .bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(to top, var(--purple-mid), var(--purple));
+      opacity: 0.85;
+      transition: opacity 0.2s;
+      min-height: 4px;
+    }
+    .bar:hover { opacity: 1; }
+
+    .bar.accent {
+      background: linear-gradient(to top, var(--purple), var(--accent));
+      opacity: 1;
+    }
+
+    .bar-label {
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    /* Sparkline */
+    .sparkline {
+      height: 48px;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+
+    .spark-svg { width: 100%; height: 100%; overflow: visible; }
+
+    /* Activity feed */
+    .bi-activity {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .bi-activity-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+
+    .bi-activity-row:last-child { border-bottom: none; }
+
+    .bi-activity-name { color: var(--text); font-weight: 500; }
+    .bi-activity-source { color: var(--muted); font-size: 0.72rem; }
+
+    .bi-status {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .status-new { background: rgba(52,211,153,0.1); color: var(--success); }
+    .status-warm { background: rgba(155,89,255,0.12); color: var(--accent); }
+    .status-contacted { background: rgba(251,191,36,0.1); color: #fbbf24; }
+    .status-closed { background: rgba(156,163,175,0.1); color: var(--muted); }
+
+    .bi-score {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+      text-align: right;
+    }
+
+    /* ── B2B ── */
+    .b2b-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .b2b-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .b2b-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 8px 32px var(--purple-glow);
+    }
+
+    .b2b-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .b2b-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(155,89,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .b2b-card h3 { font-size: 1rem; font-weight: 600; }
+    .b2b-card .b2b-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+
+    .b2b-card p {
+      font-size: 0.875rem;
+      color: var(--muted-2);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .b2b-workflows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .workflow-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--muted-2);
+    }
+
+    .workflow-pill::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+
+    .b2b-process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .b2b-process { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .b2b-process { grid-template-columns: 1fr; }
+    }
+
+    .b2b-process-step {
+      background: var(--surface);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .b2b-process-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--purple), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .b2b-process-step h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .b2b-process-step p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 640px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      max-width: 260px;
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .footer-col a {
+      color: var(--muted-2);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--text); }
+
+    .footer-bottom {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom span { color: var(--purple); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">🪶</div>
+      Raven AI
+    </a>
+    <ul class="nav-links">
+      <li><a href="#problems">The Problem</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#intelligence">Intelligence</a></li>
+      <li><a href="#b2b">For Business</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">
+            <span></span>
+            Now accepting first clients — pro bono publico
+          </div>
+          <h1>Your job search deserves a <span class="grad">thinking partner.</span></h1>
+          <p class="hero-sub">
+            AI-powered consulting for technical professionals who are capable, qualified, and stuck. We use real intelligence — not job board algorithms — to get you moving.
+          </p>
+          <div class="btn-group">
+            <a href="#contact" class="btn-primary">Start a Conversation</a>
+            <a href="#how" class="btn-ghost">See How It Works</a>
+          </div>
+        </div>
+        <div>
+          <div class="hero-card">
+            <div class="hero-card-label">Active Client Dashboard — Sample</div>
+            <div class="stat-row">
+              <div class="stat">
+                <div class="stat-value">14</div>
+                <div class="stat-label">Targeted roles identified</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Applications in progress</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">87%</div>
+                <div class="stat-label">Criteria match rate</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">↑12</div>
+                <div class="stat-label">Skills momentum score</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot dot-green"></div>
+              New PACS Administrator role — Vancouver Health Authority
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot dot-purple"></div>
+              Resume tailored for Healthcare IT Manager role
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot dot-accent"></div>
+              Weekly strategy session — Tuesday 10am
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMS -->
+  <div class="problems-section" id="problems">
+    <div class="container">
+      <section>
+        <span class="label">The Problem</span>
+        <h2 class="section-title">Most job searches fail before they start.</h2>
+        <p class="section-body">Not because of your skills — because of how you're searching. The system isn't built for you. We fix that.</p>
+        <div class="problems-grid">
+          <div class="problem-cell">
+            <div class="problem-icon">🌀</div>
+            <h3>Spray and pray</h3>
+            <p>Applying everywhere with no strategy, waiting for something to stick. It doesn't. It burns time and confidence.</p>
+          </div>
+          <div class="problem-cell">
+            <div class="problem-icon">🧱</div>
+            <h3>Imposter syndrome</h3>
+            <p>You have the skills. You have the experience. But somehow the application stays in drafts. We've been there.</p>
+          </div>
+          <div class="problem-cell">
+            <div class="problem-icon">📉</div>
+            <h3>Information overload</h3>
+            <p>Hundreds of listings, most irrelevant. Filtering takes longer than applying. We automate the noise away.</p>
+          </div>
+          <div class="problem-cell">
+            <div class="problem-icon">⏳</div>
+            <h3>No capacity left</h3>
+            <p>You're still working, still studying, still living. The job search is the thing that keeps getting pushed to tomorrow.</p>
+          </div>
+          <div class="problem-cell">
+            <div class="problem-icon">🧭</div>
+            <h3>No clear destination</h3>
+            <p>Vague goals produce vague results. Without a target, every step feels equally valid — and equally pointless.</p>
+          </div>
+          <div class="problem-cell">
+            <div class="problem-icon">🔁</div>
+            <h3>Motivation collapse</h3>
+            <p>One rejection, one silence, one bad week — and the whole thing stalls. Momentum is a system problem, not a willpower problem.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div id="how">
+    <div class="container">
+      <section>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start">
+          <div>
+            <span class="label">How It Works</span>
+            <h2 class="section-title">Four steps from stuck to moving.</h2>
+            <p class="section-body">No generic advice. No cookie-cutter templates. Everything is built around your specific situation, field, and goals.</p>
+          </div>
+          <div>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                  <h3>The Clarity Session</h3>
+                  <p>We map where you are, where you want to be, and what's actually in the way. One conversation — real answers.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                  <h3>Strategy Build</h3>
+                  <p>A job search with a destination. Target roles, target companies, target timeline. Criteria your AI scout will use daily.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                  <h3>Intelligence Feed</h3>
+                  <p>Daily digest of matching opportunities, filtered to your criteria. You review and decide — no more scrolling.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-num">04</div>
+                <div class="step-content">
+                  <h3>Weekly Momentum Sessions</h3>
+                  <p>Regular check-ins to review progress, adjust strategy, and keep the energy moving. You're not doing this alone.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div id="services" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <section>
+        <span class="label">Services</span>
+        <h2 class="section-title">What we actually do for you.</h2>
+        <p class="section-body">Every engagement is tailored. These are the building blocks we assemble around your specific situation.</p>
+        <div class="services-grid">
+          <div class="service-card featured">
+            <div class="featured-badge">Most Popular</div>
+            <div class="service-icon">🎯</div>
+            <h3>Full Search Partnership</h3>
+            <p>End-to-end support from strategy through offer. Daily intel, weekly sessions, resume tailoring, and a thinking partner available when you need one.</p>
+            <div class="service-tags">
+              <span class="tag">Strategy</span>
+              <span class="tag">Daily digest</span>
+              <span class="tag">Resume</span>
+              <span class="tag">Weekly sessions</span>
+              <span class="tag">Interview prep</span>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🔍</div>
+            <h3>Intelligence Only</h3>
+            <p>You know what you're doing — you just need the right opportunities delivered daily. We set up your criteria and run the scout.</p>
+            <div class="service-tags">
+              <span class="tag">Automated search</span>
+              <span class="tag">Daily digest</span>
+              <span class="tag">Criteria filtering</span>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🗺️</div>
+            <h3>Strategy Session</h3>
+            <p>A single deep session to map your situation, define your target, and leave with a clear action plan. No ongoing commitment required.</p>
+            <div class="service-tags">
+              <span class="tag">One-time</span>
+              <span class="tag">Clarity</span>
+              <span class="tag">Action plan</span>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">📄</div>
+            <h3>Resume & Positioning</h3>
+            <p>Your skills are real. Your resume should prove it. We reframe your experience in the language of the roles you actually want.</p>
+            <div class="service-tags">
+              <span class="tag">Resume rewrite</span>
+              <span class="tag">LinkedIn</span>
+              <span class="tag">Cover letters</span>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🧠</div>
+            <h3>Skills & Certification Roadmap</h3>
+            <p>Not sure what to study next? We map your current skills against your target roles and sequence the gaps — so learning and job hunting don't fight each other.</p>
+            <div class="service-tags">
+              <span class="tag">Gap analysis</span>
+              <span class="tag">Cert planning</span>
+              <span class="tag">Sequencing</span>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🎤</div>
+            <h3>Interview Preparation</h3>
+            <p>Technical interviews, behavioural questions, salary negotiation. We run the sessions, you get comfortable with the answers that are already yours.</p>
+            <div class="service-tags">
+              <span class="tag">Mock interviews</span>
+              <span class="tag">Technical prep</span>
+              <span class="tag">Negotiation</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <div id="philosophy">
+    <div class="container">
+      <section>
+        <div class="philosophy-grid">
+          <div>
+            <span class="label">Philosophy</span>
+            <h2 class="section-title">Pro bono publico.</h2>
+            <p style="color:var(--muted-2);margin-bottom:2rem;font-size:0.95rem">
+              For the public good. We believe the right people in the right roles makes everything better — for them, for their organisations, and for the people those organisations serve. Helping one capable person find their right role isn't charity. It's infrastructure.
+            </p>
+            <div class="philosophy-points">
+              <div class="phil-point">
+                <div class="phil-point-icon">🖤</div>
+                <div class="phil-point-text">
+                  <h4>We've been in this exact position</h4>
+                  <p>Not a coach with a script. Someone who has navigated this terrain with these exact anxieties and built tools to make it survivable.</p>
+                </div>
+              </div>
+              <div class="phil-point">
+                <div class="phil-point-icon">🌬️</div>
+                <div class="phil-point-text">
+                  <h4>Wind at your back, not in your face</h4>
+                  <p>The right tools and the right support shouldn't feel like more weight. They should make forward feel effortless.</p>
+                </div>
+              </div>
+              <div class="phil-point">
+                <div class="phil-point-icon">⚡</div>
+                <div class="phil-point-text">
+                  <h4>Momentum is a system problem</h4>
+                  <p>You don't need more motivation. You need a system that keeps you moving even when motivation isn't there.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <blockquote>
+              "A ship is safe in the harbour, but that is not what ships are made for."
+              <cite>— On why we don't stay stuck</cite>
+            </blockquote>
+            <div style="margin-top:2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem">
+              <div style="font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:1rem">Who we work with</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:0.7rem">
+                <li style="display:flex;gap:0.6rem;align-items:flex-start;font-size:0.875rem;color:var(--muted-2)"><span style="color:var(--purple);margin-top:0.1rem">▸</span> Technical professionals pivoting into AI, cloud, or DevOps</li>
+                <li style="display:flex;gap:0.6rem;align-items:flex-start;font-size:0.875rem;color:var(--muted-2)"><span style="color:var(--purple);margin-top:0.1rem">▸</span> Niche specialists — Healthcare IT, PACS, infrastructure, security</li>
+                <li style="display:flex;gap:0.6rem;align-items:flex-start;font-size:0.875rem;color:var(--muted-2)"><span style="color:var(--purple);margin-top:0.1rem">▸</span> Self-taught builders with real skills and thin formal credentials</li>
+                <li style="display:flex;gap:0.6rem;align-items:flex-start;font-size:0.875rem;color:var(--muted-2)"><span style="color:var(--purple);margin-top:0.1rem">▸</span> Anyone told they're "not quite the right fit" who knows that's not the whole story</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <section>
+        <span class="label">Early Feedback</span>
+        <h2 class="section-title">What people say when the search starts working.</h2>
+        <p class="section-body">Placeholder testimonials — real voices coming soon as we onboard our first clients.</p>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p>"I'd been applying for months with no strategy and no results. One session changed how I was thinking about the whole thing. Within three weeks I had two interviews."</p>
+            <div class="testimonial-author">
+              <div class="avatar">MK</div>
+              <div>
+                <div class="author-name">M. K.</div>
+                <div class="author-role">Cloud Infrastructure Engineer, Vancouver</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p>"The daily digest alone was worth it. I stopped spending two hours scrolling job boards and started spending twenty minutes reviewing roles that actually fit me."</p>
+            <div class="testimonial-author">
+              <div class="avatar">SL</div>
+              <div>
+                <div class="author-name">S. L.</div>
+                <div class="author-role">PACS Administrator, Healthcare IT</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p>"I have a decade of experience and still felt like a fraud when applying. Having someone help me see what I actually know — and say it clearly — changed everything."</p>
+            <div class="testimonial-author">
+              <div class="avatar">TR</div>
+              <div>
+                <div class="author-name">T. R.</div>
+                <div class="author-role">Network Security Specialist</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- BI DASHBOARD SHOWCASE -->
+  <div id="intelligence" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <section>
+        <span class="label">Business Intelligence</span>
+        <h2 class="section-title">This is what we build for your business.</h2>
+        <p class="section-body">Live dashboards pulling your real data — leads, revenue, pipeline, activity — so you stop guessing and start deciding. Here's what one looks like for a real estate team.</p>
+
+        <div class="bi-dashboard">
+          <div class="bi-topbar">
+            <div class="bi-topbar-left">
+              <div class="bi-title">Raven Intelligence — Maple Ridge Realty</div>
+              <div class="bi-badge">● LIVE</div>
+            </div>
+            <div class="bi-controls">
+              <div class="bi-control">7D</div>
+              <div class="bi-control active">30D</div>
+              <div class="bi-control">90D</div>
+            </div>
+          </div>
+
+          <div class="bi-body">
+            <div class="bi-kpi">
+              <div class="bi-kpi-label">New Leads</div>
+              <div class="bi-kpi-value">47</div>
+              <div class="bi-kpi-delta delta-up">↑ 18% vs last month</div>
+            </div>
+            <div class="bi-kpi">
+              <div class="bi-kpi-label">Active Pipeline</div>
+              <div class="bi-kpi-value">$3.2M</div>
+              <div class="bi-kpi-delta delta-up">↑ 6 new listings</div>
+            </div>
+            <div class="bi-kpi">
+              <div class="bi-kpi-label">Follow-Ups Sent</div>
+              <div class="bi-kpi-value">214</div>
+              <div class="bi-kpi-delta delta-up">↑ automated, 0 missed</div>
+            </div>
+            <div class="bi-kpi">
+              <div class="bi-kpi-label">Avg Response Time</div>
+              <div class="bi-kpi-value">4m</div>
+              <div class="bi-kpi-delta delta-up">↓ from 3.2hrs manual</div>
+            </div>
+          </div>
+
+          <div class="bi-row">
+            <div class="bi-panel">
+              <div class="bi-panel-title">Lead Volume — Last 8 Weeks</div>
+              <div class="bar-chart">
+                <div class="bar-group"><div class="bar" style="height:38%"></div><div class="bar-label">W1</div></div>
+                <div class="bar-group"><div class="bar" style="height:52%"></div><div class="bar-label">W2</div></div>
+                <div class="bar-group"><div class="bar" style="height:45%"></div><div class="bar-label">W3</div></div>
+                <div class="bar-group"><div class="bar" style="height:61%"></div><div class="bar-label">W4</div></div>
+                <div class="bar-group"><div class="bar" style="height:48%"></div><div class="bar-label">W5</div></div>
+                <div class="bar-group"><div class="bar" style="height:70%"></div><div class="bar-label">W6</div></div>
+                <div class="bar-group"><div class="bar" style="height:64%"></div><div class="bar-label">W7</div></div>
+                <div class="bar-group"><div class="bar accent" style="height:88%"></div><div class="bar-label">W8</div></div>
+              </div>
+            </div>
+
+            <div class="bi-panel">
+              <div class="bi-panel-title">Pipeline Value Trend</div>
+              <div class="sparkline">
+                <svg class="spark-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#9b59ff" stop-opacity="0.3"/>
+                      <stop offset="100%" stop-color="#9b59ff" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,40 C20,38 30,32 50,28 C70,24 80,30 100,22 C120,14 130,18 150,12 C170,6 180,8 200,4"
+                    fill="none" stroke="#9b59ff" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M0,40 C20,38 30,32 50,28 C70,24 80,30 100,22 C120,14 130,18 150,12 C170,6 180,8 200,4 L200,48 L0,48 Z"
+                    fill="url(#sparkGrad)"/>
+                  <circle cx="200" cy="4" r="3" fill="#c084fc"/>
+                </svg>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted)">
+                <span>$1.8M</span><span style="color:var(--accent);font-weight:600">$3.2M ↑</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:0 1.5rem 1.5rem">
+            <div class="bi-panel">
+              <div class="bi-panel-title">Recent Lead Activity — Automated Intelligence Feed</div>
+              <div class="bi-activity">
+                <div class="bi-activity-row">
+                  <div><div class="bi-activity-name">Chen, Michael</div><div class="bi-activity-source">Realtor.ca · 3 bedroom search · Coquitlam</div></div>
+                  <div class="bi-status status-new">New</div>
+                  <div class="bi-score">94</div>
+                </div>
+                <div class="bi-activity-row">
+                  <div><div class="bi-activity-name">Okafor, Adaeze</div><div class="bi-activity-source">Facebook Ad · First-time buyer · Pre-approved $680K</div></div>
+                  <div class="bi-status status-warm">Warm</div>
+                  <div class="bi-score">87</div>
+                </div>
+                <div class="bi-activity-row">
+                  <div><div class="bi-activity-name">Tremblay, Luc</div><div class="bi-activity-source">Referral · Downsizing · Timeline 3–6 months</div></div>
+                  <div class="bi-status status-contacted">Contacted</div>
+                  <div class="bi-score">76</div>
+                </div>
+                <div class="bi-activity-row">
+                  <div><div class="bi-activity-name">Ramirez, Sofia</div><div class="bi-activity-source">Website form · Investment property · Cash buyer</div></div>
+                  <div class="bi-status status-warm">Warm</div>
+                  <div class="bi-score">91</div>
+                </div>
+                <div class="bi-activity-row">
+                  <div><div class="bi-activity-name">Park, Ji-Woo</div><div class="bi-activity-source">Zillow · Townhouse · Port Moody preferred</div></div>
+                  <div class="bi-status status-closed">Closed ✓</div>
+                  <div class="bi-score">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:0.8rem;color:var(--muted);text-align:center;margin-top:-1rem">
+          Sample data for illustration. Your dashboard reflects your actual business, your actual numbers, your actual leads.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <!-- B2B -->
+  <div id="b2b" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <section>
+        <span class="label">For Business</span>
+        <h2 class="section-title">Your team is losing hours to work that AI can do in minutes.</h2>
+        <p class="section-body">
+          You don't need a data scientist or a six-month implementation project. You need the right workflows built around how your business actually operates — and running within days, not quarters.
+        </p>
+
+        <div class="b2b-grid">
+          <div class="b2b-card">
+            <div class="b2b-card-header">
+              <div class="b2b-icon">🏡</div>
+              <div>
+                <h3>Real Estate Teams</h3>
+                <div class="b2b-sub">Brokerages, agents, property managers</div>
+              </div>
+            </div>
+            <p>Small teams spending more time on admin than on clients. Lead follow-up that falls through the cracks. Listing research done manually every time. We automate the repetitive layer so your team can focus on relationships.</p>
+            <div class="b2b-workflows">
+              <div class="workflow-pill">Automated lead follow-up sequences</div>
+              <div class="workflow-pill">Daily listing intelligence digest</div>
+              <div class="workflow-pill">Client communication scheduling</div>
+              <div class="workflow-pill">Document collection & reminders</div>
+              <div class="workflow-pill">Market report generation</div>
+            </div>
+          </div>
+
+          <div class="b2b-card">
+            <div class="b2b-card-header">
+              <div class="b2b-icon">🏪</div>
+              <div>
+                <h3>Local Small Business</h3>
+                <div class="b2b-sub">Retail, hospitality, trades, services</div>
+              </div>
+            </div>
+            <p>You're running the business, doing the books, answering the phone, and somehow also supposed to post on Instagram. We identify which hours AI can give back to you — and we build it without the tech overwhelm.</p>
+            <div class="b2b-workflows">
+              <div class="workflow-pill">Customer enquiry triage & response</div>
+              <div class="workflow-pill">Appointment & booking automation</div>
+              <div class="workflow-pill">Review monitoring & response drafts</div>
+              <div class="workflow-pill">Social content scheduling</div>
+              <div class="workflow-pill">Inventory & supplier alerts</div>
+            </div>
+          </div>
+
+          <div class="b2b-card">
+            <div class="b2b-card-header">
+              <div class="b2b-icon">⚙️</div>
+              <div>
+                <h3>Operations & Admin Teams</h3>
+                <div class="b2b-sub">Any business with repetitive process</div>
+              </div>
+            </div>
+            <p>If your team does the same thing more than twice a week, it can probably be automated. We map your workflows, find the high-value targets, and build the automations — without disrupting what's already working.</p>
+            <div class="b2b-workflows">
+              <div class="workflow-pill">Report generation & distribution</div>
+              <div class="workflow-pill">Data entry & CRM enrichment</div>
+              <div class="workflow-pill">Internal alert & notification systems</div>
+              <div class="workflow-pill">Invoice & document processing</div>
+              <div class="workflow-pill">Cross-platform data sync</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:2rem">
+          <p class="label">How a Business Engagement Works</p>
+        </div>
+        <div class="b2b-process">
+          <div class="b2b-process-step">
+            <div class="b2b-process-num">01</div>
+            <h4>Discovery</h4>
+            <p>We map your current workflows and find where time is being lost to repetition.</p>
+          </div>
+          <div class="b2b-process-step">
+            <div class="b2b-process-num">02</div>
+            <h4>Prioritise</h4>
+            <p>We identify the two or three automations with the highest ROI for your specific situation.</p>
+          </div>
+          <div class="b2b-process-step">
+            <div class="b2b-process-num">03</div>
+            <h4>Build</h4>
+            <p>We build and test the workflows. You see it working before we hand it over.</p>
+          </div>
+          <div class="b2b-process-step">
+            <div class="b2b-process-num">04</div>
+            <h4>Hand Off</h4>
+            <p>You own it. We document everything and stay available if something needs adjusting.</p>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div id="faq">
+    <div class="container">
+      <section>
+        <span class="label">FAQ</span>
+        <h2 class="section-title">Common questions.</h2>
+        <p class="section-body">If something isn't answered here, ask us directly — we mean it.</p>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q">What does "pro bono publico" actually mean for pricing?</div>
+            <div class="faq-a">Our first engagements are offered at no cost as we build and validate the service. We're genuinely invested in your outcome — not because it's charity, but because it's how we prove what this can do.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">What fields do you specialise in?</div>
+            <div class="faq-a">Our current focus is technical professionals: AI/ML, cloud infrastructure, DevOps, Healthcare IT, cybersecurity, and adjacent fields. If your work is technical and your job search is stuck, we're worth a conversation.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">How is this different from a recruiter?</div>
+            <div class="faq-a">Recruiters work for employers. We work for you. We're not placing you — we're helping you navigate, prepare, and present yourself. We have no incentive to push you toward a role that doesn't fit.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">What does the daily job digest look like?</div>
+            <div class="faq-a">A curated list of matching roles from across the web, filtered to your specific criteria — role type, location, salary range, company size, industry. Delivered daily so you're always working with fresh intelligence.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">How much time will this take on my end?</div>
+            <div class="faq-a">We design around your real capacity — not an ideal one. Most clients spend 30–60 minutes a week in active sessions, plus whatever time they choose to put into applications. We make that time count.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">What if I don't know exactly what role I'm looking for?</div>
+            <div class="faq-a">That's exactly what we start with. The Clarity Session is built for this. Most of our clients come in knowing they want something different — not yet knowing precisely what. That's fine. That's the work.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section" id="contact">
+    <div class="cta-box">
+      <h2>Ready to find out what's possible?</h2>
+      <p>This is a conversation, not a sales call. Tell us where you're stuck — we'll take it from there.</p>
+      <a href="mailto:info@blackswansolutions.sbs" class="btn-primary">Get in Touch</a>
+      <div class="cta-note">No commitment. No pitch. Just a real conversation.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="text-decoration:none;color:var(--text)">
+          <div class="nav-logo-mark">🪶</div>
+          Raven AI
+        </a>
+        <p>AI consulting for technical professionals. Built with the same tools we use to help you — and proof that they work.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Full Search Partnership</a></li>
+          <li><a href="#services">Intelligence Feed</a></li>
+          <li><a href="#services">Strategy Session</a></li>
+          <li><a href="#services">Resume & Positioning</a></li>
+          <li><a href="#services">Interview Prep</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">BlackSwan Solutions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 <span>Raven AI</span> — BlackSwan Solutions</span>
+      <span>Built with intent. For the public good.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

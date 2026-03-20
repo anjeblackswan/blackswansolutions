@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlackSwan Solutions — Where Intelligence Meets the Unconventional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void:       #04030a;
+      --deep:       #0c0818;
+      --velvet:     #130d24;
+      --veil:       #1e1535;
+      --border:     #2a1f4a;
+      --border-2:   #3d2d6e;
+      --jewel:      #6d28d9;
+      --purple:     #8b5cf6;
+      --amethyst:   #a78bfa;
+      --lavender:   #c4b5fd;
+      --pearl:      #f0ebff;
+      --muted:      #7c6fa0;
+      --muted-2:    #a89cc4;
+      --gold:       #c9a84c;
+      --glow:       rgba(109, 40, 217, 0.15);
+      --glow-2:     rgba(139, 92, 246, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void);
+      color: var(--pearl);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(4,3,10,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pearl);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-logo .swan { font-size: 1.2rem; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--lavender); }
+
+    .nav-enter {
+      font-size: 0.72rem !important;
+      letter-spacing: 0.15em !important;
+      border: 1px solid var(--border-2) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 2px;
+      color: var(--amethyst) !important;
+      transition: border-color 0.3s, color 0.3s, background 0.3s !important;
+    }
+
+    .nav-enter:hover {
+      border-color: var(--purple) !important;
+      background: rgba(109,40,217,0.1);
+      color: var(--lavender) !important;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+    }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 1.5rem; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-aurora {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 80% at 50% -20%, rgba(109,40,217,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 60% at 20% 80%, rgba(76,29,149,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(139,92,246,0.08) 0%, transparent 45%),
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(109,40,217,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-rule {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--border-2), transparent);
+      margin: 0 auto 3rem;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--amethyst);
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      color: var(--pearl);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--amethyst) 0%, var(--lavender) 50%, var(--pearl) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted-2);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-divider-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-2));
+    }
+
+    .hero-divider-line.right {
+      background: linear-gradient(to left, transparent, var(--border-2));
+    }
+
+    .hero-divider-glyph {
+      color: var(--jewel);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+    }
+
+    .hero-body {
+      font-size: 1rem;
+      color: var(--muted-2);
+      max-width: 520px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-veil {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--jewel), var(--purple));
+      color: var(--pearl);
+      padding: 0.9rem 2.2rem;
+      border: none;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: opacity 0.3s, transform 0.2s;
+      box-shadow: 0 4px 32px rgba(109,40,217,0.3);
+    }
+
+    .btn-veil:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-ghost-veil {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--muted-2);
+      padding: 0.9rem 2.2rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .btn-ghost-veil:hover { border-color: var(--border-2); color: var(--lavender); }
+
+    /* ── MANIFESTO ── */
+    .manifesto {
+      padding: 8rem 0;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(to bottom, var(--void), var(--deep));
+    }
+
+    .manifesto-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .manifesto-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    .manifesto-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--amethyst);
+      margin-bottom: 1.5rem;
+      opacity: 0.75;
+    }
+
+    .manifesto h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--pearl);
+      margin-bottom: 2rem;
+    }
+
+    .manifesto h2 em { font-style: italic; color: var(--lavender); }
+
+    .manifesto-body p {
+      font-size: 0.95rem;
+      color: var(--muted-2);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .manifesto-body p:last-child { margin-bottom: 0; }
+
+    .manifesto-body strong {
+      color: var(--pearl);
+      font-weight: 500;
+    }
+
+    /* ── SWAN CONCEPT ── */
+    .swan-concept {
+      padding: 8rem 0;
+      border-top: 1px solid var(--border);
+      background: var(--deep);
+    }
+
+    .concept-center { text-align: center; margin-bottom: 5rem; }
+
+    .concept-center h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--pearl);
+      margin-bottom: 1rem;
+    }
+
+    .concept-center p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .pillars { grid-template-columns: 1fr; }
+    }
+
+    .pillar {
+      background: var(--deep);
+      padding: 3rem 2.5rem;
+      transition: background 0.3s;
+      position: relative;
+    }
+
+    .pillar:hover { background: var(--velvet); }
+
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--jewel), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .pillar:hover::before { opacity: 1; }
+
+    .pillar-glyph {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--jewel);
+      margin-bottom: 1.5rem;
+      display: block;
+      opacity: 0.7;
+    }
+
+    .pillar h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--pearl);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.03em;
+    }
+
+    .pillar p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── PORTAL ── */
+    .portal {
+      padding: 8rem 0;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(to bottom, var(--deep), var(--velvet));
+    }
+
+    .portal-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .portal-inner { grid-template-columns: 1fr; }
+    }
+
+    .portal-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .portal-card:hover { border-color: var(--border-2); }
+
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--glow), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .portal-card:hover::before { opacity: 1; }
+
+    .portal-card.featured {
+      border-color: var(--border-2);
+      background: linear-gradient(135deg, var(--velvet) 0%, rgba(109,40,217,0.08) 100%);
+    }
+
+    .portal-card.featured::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--jewel), var(--amethyst), transparent);
+    }
+
+    .portal-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amethyst);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .portal-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--amethyst);
+    }
+
+    .portal-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--pearl);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .portal-card p {
+      font-size: 0.875rem;
+      color: var(--muted-2);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .portal-enter {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amethyst);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: gap 0.3s, color 0.3s;
+    }
+
+    .portal-card:hover .portal-enter {
+      gap: 0.85rem;
+      color: var(--lavender);
+    }
+
+    /* ── CLOSING ── */
+    .closing {
+      padding: 8rem 0 6rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      background: linear-gradient(to bottom, var(--velvet), var(--void));
+    }
+
+    .closing-ornament {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--jewel);
+      opacity: 0.4;
+      margin-bottom: 2rem;
+      letter-spacing: 0.5em;
+    }
+
+    .closing h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--pearl);
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .closing p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 440px;
+      margin: 0 auto 3rem;
+      line-height: 1.85;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-left span { color: var(--amethyst); }
+
+    .footer-right {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer-right a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      margin-left: 1.5rem;
+    }
+
+    .footer-right a:hover { color: var(--lavender); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <span class="swan">🦢</span>
+      BlackSwan Solutions
+    </a>
+    <ul class="nav-links">
+      <li><a href="#manifesto">About</a></li>
+      <li><a href="#pillars">Philosophy</a></li>
+      <li><a href="#portal">Services</a></li>
+      <li><a href="mailto:info@blackswansolutions.sbs">Contact</a></li>
+      <li><a href="ai-consultant.html" class="nav-enter">Enter Raven AI →</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-aurora"></div>
+    <div class="hero-rule"></div>
+    <p class="hero-eyebrow">BlackSwan Solutions — Est. 2026</p>
+    <h1>Where <em>Intelligence</em><br>meets the Unconventional</h1>
+    <p class="hero-sub-title">Technology consulting for those who think differently.</p>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <span class="hero-divider-glyph">✦ ✦ ✦</span>
+      <div class="hero-divider-line right"></div>
+    </div>
+    <p class="hero-body">
+      We build intelligent systems for people and businesses who are ready to stop wrestling with technology and start using it as leverage. AI automation, business intelligence, and human-centred consulting — delivered with precision and without pretension.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#portal" class="btn-veil">Explore Our Services</a>
+      <a href="ai-consultant.html" class="btn-ghost-veil">Enter Raven AI</a>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto" id="manifesto">
+    <div class="container">
+      <div class="manifesto-inner">
+        <div>
+          <p class="manifesto-label">The BlackSwan Principle</p>
+          <h2>Rare events change<br><em>everything.</em></h2>
+        </div>
+        <div class="manifesto-body">
+          <p>
+            A black swan event is unpredictable, high-impact, and retrospectively obvious. The idea that it couldn't happen — right up until it did. <strong>We named ourselves after it deliberately.</strong>
+          </p>
+          <p>
+            Because the companies and people who thrive in the next decade won't be the ones who waited for AI to become mainstream. They'll be the ones who moved early, built intelligently, and made decisions with better information than everyone else in the room.
+          </p>
+          <p>
+            We are the thinking partner for that kind of move. <strong>Strategic. Precise. Unconventional by design.</strong> We work with technical professionals, small businesses, and teams who know something needs to change — and are ready to actually change it.
+          </p>
+          <p>
+            The darkness in our aesthetic isn't decoration. It's a point of view: that the most interesting solutions live at the edge of what's expected, and that elegance doesn't require brightness to be beautiful.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="swan-concept" id="pillars">
+    <div class="container">
+      <div class="concept-center">
+        <p class="manifesto-label">What We Stand For</p>
+        <h2>Three pillars. One standard.</h2>
+        <p>Everything we build rests on these. Non-negotiable.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar-glyph">I</span>
+          <h3>Intelligence</h3>
+          <p>Real AI — not buzzwords. We deploy systems that think, learn, route, and report. Built around your actual problem, not a product demo we're trying to sell you.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-glyph">II</span>
+          <h3>Elegance</h3>
+          <p>The Porsche principle. Fast, responsive, self-powered. We don't over-engineer. We don't add complexity for its own sake. The right solution is always the simplest one that actually works.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-glyph">III</span>
+          <h3>Purpose</h3>
+          <p>Pro bono publico — for the public good. The work we do for individuals builds capability that flows into communities, organisations, and systems. We measure success by what gets better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAL -->
+  <section class="portal" id="portal">
+    <div class="container">
+      <div class="concept-center">
+        <p class="manifesto-label">Our Services</p>
+        <h2>Two chambers. One house.</h2>
+        <p>Choose your door.</p>
+      </div>
+      <div class="portal-inner">
+        <a href="ai-consultant.html" class="portal-card featured">
+          <div class="portal-tag"><span class="portal-tag-dot"></span>AI Consulting</div>
+          <h3>Raven AI — For People</h3>
+          <p>Career navigation and job search intelligence for technical professionals. If you're capable, qualified, and stuck — this is where the wind changes direction.</p>
+          <div class="portal-enter">Enter Raven AI <span>→</span></div>
+        </a>
+        <a href="mailto:info@blackswansolutions.sbs" class="portal-card">
+          <div class="portal-tag"><span class="portal-tag-dot"></span>Business Intelligence</div>
+          <h3>Workflow Automation — For Business</h3>
+          <p>AI-powered business intelligence and workflow automation for small businesses, real estate teams, and operations that are ready to stop doing manually what a machine can do better.</p>
+          <div class="portal-enter">Get in Touch <span>→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="container">
+      <div class="closing-ornament">✦ ✦ ✦</div>
+      <h2>"The ship is safe in the harbour.<br>But that is not what ships are made for."</h2>
+      <p>We help people and businesses leave the harbour. If you're ready to find out what's possible, the door is open.</p>
+      <a href="mailto:info@blackswansolutions.sbs" class="btn-veil">Begin the Conversation</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      🦢 <span>BlackSwan Solutions</span> — 2026
+    </div>
+    <div class="footer-right">
+      <a href="#manifesto">About</a>
+      <a href="ai-consultant.html">Raven AI</a>
+      <a href="mailto:info@blackswansolutions.sbs">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
